@@ -22,3 +22,14 @@ alias mute="osascript -e 'set volume output muted true'"
 alias unmute="osascript -e 'set volume output muted false'"
 alias docker_wipe_all="docker system prune --all --volumes"
 alias docker_wipe="docker system prune"
+
+# Normalize `open` across Linux, macOS, and Windows.
+# This is needed to make the `o` function (see below) cross-platform.
+if [ ! $(uname -s) = 'Darwin' ]; then
+	if grep -q Microsoft /proc/version; then
+		# Ubuntu on Windows using the Linux subsystem
+		alias open='explorer.exe';
+	else
+		alias open='xdg-open';
+	fi
+fi
