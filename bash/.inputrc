@@ -1,7 +1,7 @@
 # Make Tab autocomplete regardless of filename case
 set completion-ignore-case on
 
-set editing-mode vi
+#set editing-mode vi
 #set -o vi
 
 # List all matches in case multiple possible completions are possible
