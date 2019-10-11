@@ -1,0 +1,263 @@
+" GENERAL {{{
+" disable vi mode
+set nocompatible
+
+"
+set encoding=utf-8
+set nobackup
+set nowb
+set noswapfile
+set backspace=indent,eol,start
+set whichwrap+=<,>,h,l
+set laststatus=2
+set ruler
+set hidden
+"set updatetime=300
+set esckeys
+set shortmess+=c
+set autoread
+
+" show linenumbers and wrapping
+set number
+set relativenumber
+set wrap
+set nolbr
+set textwidth=0
+set so=5
+
+" searching
+set ignorecase
+set smartcase
+set incsearch
+set nohlsearch
+set noshowmatch
+
+" indentation
+set autoindent
+set smartindent
+set expandtab
+set smarttab
+set shiftwidth=2
+set tabstop=2
+
+" no error bells
+set noerrorbells
+set novisualbell
+set t_vb=
+
+" enable autocompletion
+set wildmenu
+set wildignore=*.o,*~,*.pyc,*/node_modules/*,*/build/*,*/dist/*
+set wildmode=longest:full,full
+set splitbelow splitright
+
+" command bar
+set showcmd
+set noshowmode
+set cmdheight=1
+
+" folding
+set foldenable                      " enable folding
+set foldmethod=syntax               " global folding method
+set foldlevelstart=20                " folds with level 20 aren't closed
+"set foldcolumn=1
+
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+
+" Properly disable sound on errors on MacVim
+if has("gui_macvim")
+  autocmd GUIEnter * set vb t_vb=
+endif
+" }}}
+
+" KEYMAPS {{{
+
+" keyboard remaps and shortcuts
+let mapleader=" "
+let g:mapleader=" "
+
+nnoremap - /
+
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>s :so ~/.vim/vimrc<CR>
+nnoremap <leader>v :tabedit ~/.vim/vimrc<CR>
+nnoremap <leader>r :%s//gc<Left><Left><Left>
+nnoremap <leader>f :grep -riF 
+nnoremap <leader><cr> :noh<CR>
+nnoremap <leader>l <C-w>l
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>t <c-]>
+nnoremap <C-n> :Lex<CR>
+nnoremap <leader>+ :vert res +10<CR>
+nnoremap <leader>- :vert res -10<CR>
+nnoremap <leader>* :res +10<CR>
+nnoremap <leader>_ :res -10<CR>
+nnoremap <leader>n :cnext<CR>
+nnoremap <leader>p :cprev<CR>
+
+" FZF
+nnoremap <leader>b :Buffers<CR>
+nnoremap <C-p> :GFiles<CR>
+
+" VIM-COC
+
+" GoTo code navigation.
+nmap gd <Plug>(coc-definition)
+nmap gy <Plug>(coc-type-definition)
+nmap gi <Plug>(coc-implementation)
+nmap gr <Plug>(coc-references)
+nnoremap gf :Lex %:h<CR>
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Symbol renaming.
+nmap <leader>cr <Plug>(coc-rename)
+
+" view all errors
+nnoremap <leader>cl  :<C-u>CocList locationlist<CR>
+
+" restart when tsserver gets wonky
+nnoremap <leader>cR  :<C-u>CocRestart<CR>
+
+" manage extensions
+nnoremap <leader>cx  :<C-u>CocList extensions<cr>
+
+" list commands available in tsserver (and others)
+nnoremap <leader>cc  :<C-u>CocList commands<cr>
+
+" Diagnostics
+nmap <leader>cp <Plug>(coc-diagnostic-prev)
+nmap <leader>cn <Plug>(coc-diagnostic-next)
+nmap <leader>ci <Plug>(coc-diagnostic-info)
+nnoremap <leader>cd  :<C-u>CocDiagnostic<cr>
+
+" show quickaction
+nmap <leader>ca <Plug>(coc-codeaction-cursor)
+vmap <leader>ca <Plug>(coc-codeaction-selected)
+
+" use <c-space>for trigger completion
+inoremap <silent><expr> <NUL> coc#refresh()
+if has('gui_running')
+  inoremap <silent><expr> <c-space> coc#refresh()
+endif
+
+nnoremap <leader>cf <Plug>(coc-format)
+vnoremap <leader>f <Plug>(coc-format-selected)
+
+" }}}
+
+" PLUGINS {{{
+
+" plugins and indentation based on filetype
+filetype off
+
+call plug#begin('~/.vim/plugged')
+"
+Plug 'morhetz/gruvbox'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-commentary'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"
+call plug#end()
+
+"
+" FZF
+"
+let g:fzf_preview_window = ''
+
+filetype plugin indent on
+
+" }}}
+
+" THEME {{{
+
+set cursorline
+
+" Important!!
+if has('termguicolors')
+  set termguicolors
+endif
+
+set t_Co=256
+
+if has('gui_running')
+  set guioptions-=T
+  set guioptions-=e
+  set guioptions-=r
+  set guioptions-=R
+  set guioptions-=l
+  set guioptions-=L
+  set guifont=Hack:h14
+  set linespace=2
+endif
+
+" status line
+let g:modes={
+      \ 'n'  : 'NORMAL',
+      \ 'v'  : 'VISUAL',
+      \ 'V'  : 'V·Line',
+      \ '' : 'V·Block',
+      \ 'i'  : 'INSERT',
+      \ 'R'  : 'R',
+      \ 'Rv' : 'V·Replace',
+      \ 'c'  : 'Command',
+      \}
+
+function! ModeCurrent() abort
+  let l:modecurrent = mode()
+  let l:modelist = tolower(get(g:modes, l:modecurrent, 'V·Block'))
+  return l:modelist
+endfunction
+
+set statusline=
+set statusline+=[%{ModeCurrent()}]
+set statusline+=\ %f                           " file name
+set statusline+=%=                        " align left
+set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
+set statusline+=%{&ff}] "file format
+set statusline+=%y      "filetype
+set statusline+=%h      "help file flag
+set statusline+=%m      "modified flag
+set statusline+=%r      "read only flag
+set statusline+=\ %l/%L\ [%p%%]        " line X of Y [percent of file]
+set statusline+=\ Col:%c\                     " current column
+"
+" Theme
+" For dark version.
+set background=dark
+" For light version.
+"set background=light
+" Set contrast.
+" This configuration option should be placed before `colorscheme everforest`.
+" Available values: 'hard', 'medium'(default), 'soft'
+" let g:everforest_background = 'hard'
+colorscheme gruvbox
+syntax on
+
+"hi User1 cterm=reverse ctermfg=12 ctermbg=0
+hi StatusLine term=bold,reverse cterm=reverse ctermfg=2 ctermbg=0 gui=reverse guifg=#fabc2e guibg=#2b3339
+hi StatusLineNC term=bold,reverse cterm=reverse ctermfg=7 ctermbg=0 gui=reverse guifg=#928373 guibg=#2b3339
+
+" }}}
+
+au BufRead,BufNewFile *.handlebars,*.hbs set ft=html syntax=handlebars
