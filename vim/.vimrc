@@ -130,7 +130,7 @@ set laststatus=2
 set ruler
 
 " Format the status line
-set clipboard^=unnamed
+"set clipboard^=unnamed
 
 " Set extra options when running in GUI mode
 if has("gui_running")
