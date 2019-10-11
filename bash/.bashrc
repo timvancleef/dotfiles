@@ -1,4 +1,7 @@
-for FILE in $(find -L .includes -depth 2 -type f); do
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+for FILE in $(find -L .includes -maxdepth 2 -type f); do
   source "$FILE"
 done;
 
