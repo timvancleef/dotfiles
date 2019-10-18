@@ -24,3 +24,4 @@ $ stow --target ~ --restow <package name>
 
 * bash
 * vim
+* git
