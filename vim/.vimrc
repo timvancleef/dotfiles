@@ -149,10 +149,10 @@ catch
 endtry
 
 " Shortcutting split navigation, saving a keypress:
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
 
 " Visual mode pressing * or # searches for the current selection
 " Super useful! From an idea by Michael Naumann
