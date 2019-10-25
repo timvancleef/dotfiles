@@ -28,6 +28,7 @@ Plug 'prettier/vim-prettier', {
 Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
+Plug 'dracula/vim', { 'as': 'dracula' }
 " Initialize plugin system
 call plug#end()
 " Gruvbox Settings
@@ -45,7 +46,7 @@ set autoread
 set notimeout ttimeout
 set path=.,**
 set background=dark
-colorscheme gruvbox
+colorscheme Tomorrow
 
 filetype plugin indent on
 
