@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
-alias ls="ls -G --color=auto"
+if [ $(uname -s) = "Darwin" ]; then
+  alias ls="ls -G"
+else
+  alias ls="ls --color=auto"
+fi
+
 alias l="ls -A"
 alias ll="ls -l"
 alias la="ls -lA"
