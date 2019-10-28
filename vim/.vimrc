@@ -33,7 +33,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 " Gruvbox Settings
 "
-"let g:gruvbox_contrast_dark="hard"
+let g:gruvbox_contrast_dark="medium"
 
 " Some basics:
 "
@@ -46,7 +46,7 @@ set autoread
 set notimeout ttimeout
 set path=.,**
 set background=dark
-colorscheme Tomorrow
+colorscheme gruvbox
 
 filetype plugin indent on
 
