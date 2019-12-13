@@ -18,6 +18,9 @@ let g:netrw_alto=1
 let g:netrw_browse_split = 4
 let g:typescript_indent_disable = 1
 
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'
+
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
@@ -29,6 +32,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'scrooloose/nerdtree'
 " Initialize plugin system
 call plug#end()
 " Gruvbox Settings
@@ -44,13 +48,16 @@ set encoding=utf-8
 set number relativenumber
 set autoread
 set notimeout ttimeout
-set path=.,**
+set path=.,**,
 set background=dark
 colorscheme gruvbox
+set cursorline
 
 filetype plugin indent on
 
 nnoremap <C-t> :Vex<CR>
+
+map <C-n> :NERDTreeToggle<CR>
 
 " Fast saving
 nmap <leader>w :w!<cr>
