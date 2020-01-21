@@ -110,14 +110,11 @@ _docker_compose_build() {
 			__docker_compose_nospace
 			return
 			;;
-		--memory|-m)
-			return
-			;;
 	esac
 
 	case "$cur" in
 		-*)
-			COMPREPLY=( $( compgen -W "--build-arg --compress --force-rm --help --memory -m --no-cache --no-rm --pull --parallel -q --quiet" -- "$cur" ) )
+			COMPREPLY=( $( compgen -W "--build-arg --compress --force-rm --help --memory --no-cache --pull --parallel" -- "$cur" ) )
 			;;
 		*)
 			__docker_compose_complete_services --filter source=build
@@ -150,7 +147,7 @@ _docker_compose_config() {
 			;;
 	esac
 
-	COMPREPLY=( $( compgen -W "--hash --help --no-interpolate --quiet -q --resolve-image-digests --services --volumes" -- "$cur" ) )
+	COMPREPLY=( $( compgen -W "--hash --help --quiet -q --resolve-image-digests --services --volumes" -- "$cur" ) )
 }
 
 
@@ -182,10 +179,6 @@ _docker_compose_docker_compose() {
 			;;
 		--project-directory)
 			_filedir -d
-			return
-			;;
-		--env-file)
-			_filedir
 			return
 			;;
 		$(__docker_compose_to_extglob "$daemon_options_with_args") )
@@ -616,7 +609,6 @@ _docker_compose() {
 		--tlsverify
 	"
 	local daemon_options_with_args="
-		--env-file
 		--file -f
 		--host -H
 		--project-directory

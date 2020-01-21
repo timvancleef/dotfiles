@@ -25,3 +25,22 @@ function feature() {
   echo $cmd
   eval $cmd
 }
+
+function update_bash_completions() {
+  local cmd="cp /Applications/Docker.app/Contents/Resources/etc/docker.bash-completion $1docker.sh"
+  echo -e "\n$cmd"
+  eval $cmd
+
+  local cmd="cp /Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion $1docker-compose.sh"
+  echo -e "\n$cmd"
+  eval $cmd
+
+  local cmd="curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o $1git-completion.sh"
+  echo -e "\n$cmd"
+  eval $cmd
+
+  local cmd="npm completion > $1npm.sh"
+  echo -e "\n$cmd"
+  eval $cmd
+
+}
