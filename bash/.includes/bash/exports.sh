@@ -15,7 +15,6 @@ export MANPAGER='less -X';
 
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
-[[ -f /usr/libexec/java_home ]] && export JAVA_HOME=$(/usr/libexec/java_home)
 export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
 export LSCOLORS="gxfxcxdxbxegedabagacad"
 
