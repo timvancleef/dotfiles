@@ -2,6 +2,7 @@
 
 if [ $(uname -s) = "Darwin" ]; then
   alias ls="ls -G"
+  alias brew_update="brew update && brew upgrade && brew cleanup --prune -s && brew doctor && brew missing"
 else
   alias ls="ls --color=auto"
 fi
@@ -18,11 +19,9 @@ alias dv="cd ~/Development"
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
-#alias less="less --color"
 alias week="date +%V"
 alias localip="ipconfig getifaddr en0"
 alias nettop_external="nettop -c -t external"
-alias brew_update="brew update && brew upgrade && brew cleanup && brew doctor && brew missing"
 alias npm_update="npm install npm -g && npm update -g"
 alias mute="osascript -e 'set volume output muted true'"
 alias unmute="osascript -e 'set volume output muted false'"
