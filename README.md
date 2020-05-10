@@ -6,6 +6,8 @@ Dotfiles are managed via [GNU stow](https://www.gnu.org/software/stow/).
 
 ```bash
 $ stow --target ~ --stow <package name>
+# or:
+$ stow -t ~ <package name>
 ```
 
 ## Unistall a dotfile package
