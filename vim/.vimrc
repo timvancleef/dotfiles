@@ -1,6 +1,21 @@
 let mapleader = ","
 let g:mapleader = ","
 
+"Mode Settings
+
+let &t_SI.="\e[5 q" "SI = INSERT mode
+let &t_SR.="\e[4 q" "SR = REPLACE mode
+let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
+
+"Cursor settings:
+
+"  1 -> blinking block
+"  2 -> solid block
+"  3 -> blinking underscore
+"  4 -> solid underscore
+"  5 -> blinking vertical bar
+"  6 -> solid vertical bar
+
 " NETRW Settings
 "
 let g:netrw_banner = 1
@@ -20,6 +35,8 @@ let g:typescript_indent_disable = 1
 
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
+
+"set termguicolors
 
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
@@ -64,7 +81,7 @@ nmap <leader>w :w!<cr>
 
 " Fast existing
 nmap <leader>q :q<cr>
-nmap <leader>a :qa<cr>
+"nmap <leader>a :qa<cr>
 
 " Enable autocompletion:
 set wildmenu
