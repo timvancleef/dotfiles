@@ -38,3 +38,5 @@
 	recurse = false
 [include]
   path = ./.gitconfig.local
+[init]
+	defaultBranch = main
