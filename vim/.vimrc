@@ -18,23 +18,17 @@ let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 
 " NETRW Settings
 "
-let g:netrw_banner = 1
-let g:netrw_preview   = 1
-let g:netrw_liststyle = 3
-"let g:netrw_winsize   = 30
-" open files from netrw in a previous window, unless we're opening the current dir
-"if argv(0) ==# '.'
-"    let g:netrw_browse_split = 0
-"else
-"    let g:netrw_browse_split = 4
-"endif
-let g:netrw_altv=1
-let g:netrw_alto=1
-let g:netrw_browse_split = 4
-let g:typescript_indent_disable = 1
+"let g:netrw_banner = 0
+"let g:netrw_liststyle = 3
+let g:netrw_browse_split = 0
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+"augroup ProjectDrawer
+"  autocmd!
+"  autocmd VimEnter * :Vexplore
+"augroup END
 
-let g:NERDTreeDirArrowExpandable = '+'
-let g:NERDTreeDirArrowCollapsible = '-'
+let g:typescript_indent_disable = 1
 
 "set termguicolors
 
@@ -49,8 +43,8 @@ Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'scrooloose/nerdtree'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'morhetz/gruvbox'
+"Plug 'scrooloose/nerdtree'
 " Initialize plugin system
 call plug#end()
 " Gruvbox Settings
