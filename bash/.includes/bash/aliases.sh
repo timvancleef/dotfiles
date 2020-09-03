@@ -2,7 +2,7 @@
 
 if [ $(uname -s) = "Darwin" ]; then
   alias ls="ls -G"
-  alias brew_update="brew update && brew upgrade && brew cleanup --prune -s && brew doctor && brew missing"
+  alias brew_update="brew update && brew upgrade && brew cleanup --prune all -s && brew doctor && brew missing"
 else
   alias ls="ls --color=auto"
 fi
