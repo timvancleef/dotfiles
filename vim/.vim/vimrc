@@ -1,0 +1,4 @@
+:source ~/.vim/after/general.vim
+:source ~/.vim/after/plugins.vim
+:source ~/.vim/after/keymaps.vim
+:source ~/.vim/after/theme.vim
