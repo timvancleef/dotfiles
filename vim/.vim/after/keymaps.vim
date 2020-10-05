@@ -19,4 +19,15 @@ nnoremap <silent> <C-n> :Lex<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <silent> <C-p> :GFiles<CR>
 
-"nnoremap <leader>gc :Commentary<CR>
+nnoremap <leader>gc :Commentary<CR>
+
+" VIM-COC
+inoremap <silent><expr> <c-@> coc#refresh()
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+nnoremap <leader>a :CocDiagnostics<CR>

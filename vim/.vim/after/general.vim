@@ -11,6 +11,8 @@ set whichwrap+=<,>,h,l
 set laststatus=2
 set ruler
 set hidden
+set updatetime=300
+set shortmess+=c
 
 " show linenumbers and wrapping
 set number
@@ -41,10 +43,10 @@ set t_vb=
 " enable autocompletion
 set wildmenu
 set wildignore=*.o,*~,*.pyc,*/node_modules/*,*/build/*,*/dist/*
-set wildmode=longest:full
+set wildmode=longest:full,full
 set splitbelow splitright
 
 " command bar
 set showcmd
 set noshowmode
-set cmdheight=1
+set cmdheight=2
