@@ -33,15 +33,15 @@ endfunction
 
 function! ModeCurrent() abort
   let l:modecurrent = mode()
-  let l:modelist = toupper(get(g:modes, l:modecurrent, 'V·Block '))
+  let l:modelist = tolower(get(g:modes, l:modecurrent, 'V·Block '))
   return l:modelist
 endfunction
 
 set statusline=%#StatusLine#
 set statusline+=%{StatusColor()}
-set statusline+=\ %{ModeCurrent()}\ 
+"set statusline+=\ %{ModeCurrent()}\ 
 set statusline+=%1*
-set statusline+=\ %f                           " file name
+set statusline+=%f                           " file name
 set statusline+=%=                        " align left
 set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
 set statusline+=%{&ff}] "file format
@@ -50,6 +50,7 @@ set statusline+=%h      "help file flag
 set statusline+=%m      "modified flag
 set statusline+=%r      "read only flag
 set statusline+=\ %#StatusLine#
+set statusline+=\ %{ModeCurrent()}
 set statusline+=\ %l/%L\ [%p%%]        " line X of Y [percent of file]
 set statusline+=\ Col:%c\                     " current column
 
@@ -58,10 +59,11 @@ let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
+let g:netrw_alto = 1
 let g:netrw_winsize = 25
 
 " different cursor for insert mode
-let &t_SI.="\e[5 q" "SI = INSERT mode
-let &t_SR.="\e[4 q" "SR = REPLACE mode
-let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
+"let &t_SI.="\e[5 q" "SI = INSERT mode
+"let &t_SR.="\e[4 q" "SR = REPLACE mode
+"let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 

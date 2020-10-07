@@ -7,9 +7,8 @@ else
   alias ls="ls --color=auto"
 fi
 
-alias l="ls -A"
-alias ll="ls -l"
-alias la="ls -lA"
+alias l="ls -l"
+alias ll="ls -lA"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."

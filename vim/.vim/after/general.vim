@@ -11,8 +11,10 @@ set whichwrap+=<,>,h,l
 set laststatus=2
 set ruler
 set hidden
-set updatetime=300
+"set updatetime=300
+set esckeys
 set shortmess+=c
+set autoread
 
 " show linenumbers and wrapping
 set number
@@ -25,7 +27,7 @@ set ignorecase
 set smartcase
 set incsearch
 set hlsearch
-set showmatch
+set noshowmatch
 
 " indentation
 set autoindent
@@ -49,4 +51,4 @@ set splitbelow splitright
 " command bar
 set showcmd
 set noshowmode
-set cmdheight=2
+set cmdheight=1

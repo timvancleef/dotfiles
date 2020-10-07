@@ -12,11 +12,16 @@ Plug 'niftylettuce/vim-jinja'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-
+Plug 'prettier/vim-prettier'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 call plug#end()
 
 " FZF
 let g:fzf_preview_window = ''
+
+" Markdown
+let g:vim_markdown_folding_disabled = 1
 
 filetype plugin indent on
