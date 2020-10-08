@@ -16,13 +16,15 @@ nnoremap <leader>k <C-w>k
 nnoremap <leader>t <c-]>
 nnoremap <silent> <C-n> :Lex<CR>
 
+" FZF
 nnoremap <leader>b :Buffers<CR>
 nnoremap <silent> <C-p> :GFiles<CR>
 
+" Commentary
 nnoremap <leader>gc :Commentary<CR>
 
 " VIM-COC
-inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <c-@> coc#refresh()
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)

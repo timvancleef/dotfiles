@@ -1,5 +1,7 @@
 {
   "suggest.autoTrigger": "none",
   "diagnostic.enable": true,
-  "diagnostic.enableSign": false
+  "diagnostic.enableSign": false,
+  "eslint.run": "onSave",
+  "eslint.autoFixOnSave": true
 }
