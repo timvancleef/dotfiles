@@ -6,15 +6,11 @@ call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-"Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-commentary'
 Plug 'niftylettuce/vim-jinja'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-Plug 'prettier/vim-prettier'
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
 
 call plug#end()
 
