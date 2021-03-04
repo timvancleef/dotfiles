@@ -110,28 +110,19 @@ _docker_compose_build() {
 			__docker_compose_nospace
 			return
 			;;
+		--memory|-m)
+			return
+			;;
 	esac
 
 	case "$cur" in
 		-*)
-			COMPREPLY=( $( compgen -W "--build-arg --compress --force-rm --help --memory --no-cache --pull --parallel" -- "$cur" ) )
+			COMPREPLY=( $( compgen -W "--build-arg --compress --force-rm --help --memory -m --no-cache --no-rm --pull --parallel -q --quiet" -- "$cur" ) )
 			;;
 		*)
 			__docker_compose_complete_services --filter source=build
 			;;
 	esac
-}
-
-
-_docker_compose_bundle() {
-	case "$prev" in
-		--output|-o)
-			_filedir
-			return
-			;;
-	esac
-
-	COMPREPLY=( $( compgen -W "--push-images --help --output -o" -- "$cur" ) )
 }
 
 
@@ -147,7 +138,7 @@ _docker_compose_config() {
 			;;
 	esac
 
-	COMPREPLY=( $( compgen -W "--hash --help --quiet -q --resolve-image-digests --services --volumes" -- "$cur" ) )
+	COMPREPLY=( $( compgen -W "--hash --help --no-interpolate --quiet -q --resolve-image-digests --services --volumes" -- "$cur" ) )
 }
 
 
@@ -173,12 +164,20 @@ _docker_compose_docker_compose() {
 			_filedir "y?(a)ml"
 			return
 			;;
+		--ansi)
+			COMPREPLY=( $( compgen -W "never always auto" -- "$cur" ) )
+			return
+			;;
 		--log-level)
 			COMPREPLY=( $( compgen -W "debug info warning error critical" -- "$cur" ) )
 			return
 			;;
 		--project-directory)
 			_filedir -d
+			return
+			;;
+		--env-file)
+			_filedir
 			return
 			;;
 		$(__docker_compose_to_extglob "$daemon_options_with_args") )
@@ -295,7 +294,7 @@ _docker_compose_logs() {
 
 	case "$cur" in
 		-*)
-			COMPREPLY=( $( compgen -W "--follow -f --help --no-color --tail --timestamps -t" -- "$cur" ) )
+			COMPREPLY=( $( compgen -W "--follow -f --help --no-color --no-log-prefix --tail --timestamps -t" -- "$cur" ) )
 			;;
 		*)
 			__docker_compose_complete_services
@@ -550,7 +549,7 @@ _docker_compose_up() {
 
 	case "$cur" in
 		-*)
-			COMPREPLY=( $( compgen -W "--abort-on-container-exit --always-recreate-deps --build -d --detach --exit-code-from --force-recreate --help --no-build --no-color --no-deps --no-recreate --no-start --renew-anon-volumes -V --remove-orphans --scale --timeout -t" -- "$cur" ) )
+			COMPREPLY=( $( compgen -W "--abort-on-container-exit --always-recreate-deps --attach-dependencies --build -d --detach --exit-code-from --force-recreate --help --no-build --no-color --no-deps --no-log-prefix --no-recreate --no-start --renew-anon-volumes -V --remove-orphans --scale --timeout -t" -- "$cur" ) )
 			;;
 		*)
 			__docker_compose_complete_services
@@ -574,7 +573,6 @@ _docker_compose() {
 
 	local commands=(
 		build
-		bundle
 		config
 		create
 		down
@@ -609,6 +607,8 @@ _docker_compose() {
 		--tlsverify
 	"
 	local daemon_options_with_args="
+		--context -c
+		--env-file
 		--file -f
 		--host -H
 		--project-directory
@@ -620,6 +620,7 @@ _docker_compose() {
 
 	# These options are require special treatment when searching the command.
 	local top_level_options_with_args="
+		--ansi
 		--log-level
 	"
 
