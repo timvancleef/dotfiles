@@ -11,6 +11,7 @@ Plug 'niftylettuce/vim-jinja'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+Plug 'evanleck/vim-svelte', {'branch': 'main'}
 
 call plug#end()
 
