@@ -39,6 +39,10 @@ function update_bash_completions() {
   echo -e "\n$cmd"
   eval $cmd
 
+  local cmd="curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o $1git-prompt.sh"
+  echo -e "\n$cmd"
+  eval $cmd
+
   local cmd="npm completion > $1npm.sh"
   echo -e "\n$cmd"
   eval $cmd
