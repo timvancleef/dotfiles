@@ -81,11 +81,3 @@ alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
 alias docker_wipe_all="docker system prune --all --volumes"
 alias docker_wipe="docker system prune"
-
-alias prodssh='ssh -vAND 9999 shell001.mo-mobile-prod.dus1.cloud'
-alias git_clean='git branch --merged|grep -v "*"|xargs git branch -d'
-alias start_mongo='docker run -p 27017:27017 mongo:4.2'
-
-# NVM config
-export NVM_DIR="$HOME/.nvm"
-[ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh" # This loads nvm
