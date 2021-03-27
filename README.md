@@ -25,6 +25,7 @@ $ stow --target ~ --restow <package name>
 ## Available packages
 
 * bash
+* zsh
 * vim
 * git
 * tmux
