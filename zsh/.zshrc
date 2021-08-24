@@ -63,18 +63,14 @@ export LSCOLORS="gxfxcxdxbxegedabagacad"
 #
 # Aliases
 #
-DEV_BASE="/usr/local/Development"
+DEV_BASE="~/Development"
 
 alias la="ls -lA"
 alias l="ls -l"
 
 alias brew_update="brew update && brew upgrade && brew cleanup --prune all -s && brew doctor && brew missing"
 alias dv="cd ${DEV_BASE}"
-alias prodssh="ssh -vAND 9999 shell001.mo-mobile-prod.dus1.cloud"
 alias git_clean="git branch --merged|grep -v '*'|xargs git branch -d"
-alias start_mongo="docker run --rm -p 27017:27017 dockerhub.es.ecg.tools/mongo:4.2"
-alias webapp="cd ${DEV_BASE}/ps-dealer-webapp"
-alias dcs="cd ${DEV_BASE}/ps-dealer-care-service"
 
 alias ..="cd .."
 alias ...="cd ../.."
@@ -89,4 +85,4 @@ alias docker_wipe="docker system prune"
 #
 # Prompt
 #
-PROMPT='❯ %F{004}%2~%f${vcs_info_msg_0_} '
+PROMPT='❯ %F{010}%2~%f${vcs_info_msg_0_} '

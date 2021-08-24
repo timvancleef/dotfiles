@@ -1,7 +1,17 @@
 {
-  "suggest.autoTrigger": "none",
-  "diagnostic.enable": true,
-  "diagnostic.enableSign": false,
   "eslint.run": "onSave",
-  "eslint.autoFixOnSave": true
+  "eslint.autoFixOnSave": false,
+
+  "coc.preferences.formatOnSaveFiletypes": [
+  ],
+  "suggest.noselect": false,
+  "diagnostic.errorSign": "*",
+  "diagnostic.warningSign": "*",
+  "diagnostic.infoSign": "*",
+  "diagnostic.hintSign": "*",
+  "suggest.autoTrigger": "none",
+  "suggest.maxCompleteItemCount": 10,
+  "diagnostic.messageTarget": "echo",
+  "signature.enable": false,
+  "signature.target": "echo"
 }
