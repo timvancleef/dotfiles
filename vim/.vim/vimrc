@@ -93,7 +93,7 @@ nnoremap <leader>h <C-w>h
 nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 nnoremap <leader>t <c-]>
-nnoremap <silent> <C-n> :Lex<CR>
+nnoremap <silent> <C-n> :Lexplore<CR>
 nnoremap <silent> <leader>+ :vert res +10<CR>
 nnoremap <silent> <leader>- :vert res -10<CR>
 nnoremap <silent> <leader>* :res +10<CR>
@@ -104,6 +104,7 @@ nnoremap <silent> <leader>p :cprev<CR>
 " FZF
 nnoremap <leader>b :Buffers<CR>
 nnoremap <silent> <C-p> :GFiles<CR>
+"nnoremap <silent> <C-S-p> :Files<CR>
 
 " VIM-COC
 
@@ -142,15 +143,15 @@ nnoremap <silent> <leader>cx  :<C-u>CocList extensions<cr>
 " list commands available in tsserver (and others)
 nnoremap <silent> <leader>cc  :<C-u>CocList commands<cr>
 
-" prev and next error
+" Diagnostics
 nmap <silent> <leader>cp <Plug>(coc-diagnostic-prev)
 nmap <silent> <leader>cn <Plug>(coc-diagnostic-next)
-nmap <silent> <leader>cd <Plug>(coc-diagnostic-next)
+nmap <silent> <leader>ci <Plug>(coc-diagnostic-info)
+nnoremap <silent> <leader>cd  :<C-u>CocDiagnostic<cr>
 
 " show quickaction
 nmap <silent> <leader>ca <Plug>(coc-codeaction-cursor)
 vmap <silent> <leader>ca <Plug>(coc-codeaction-selected)
-nnoremap <silent> <leader>cd  :<C-u>CocDiagnostic<cr>
 
 " use <c-space>for trigger completion
 inoremap <silent><expr> <NUL> coc#refresh()
@@ -215,7 +216,7 @@ if has('gui_running')
   set guioptions-=R
   set guioptions-=l
   set guioptions-=L
-  set guifont=Hack:h14
+  set guifont=Noto\ Mono:h14
   set linespace=2
 endif
 
@@ -258,21 +259,23 @@ set background=dark
 " Set contrast.
 " This configuration option should be placed before `colorscheme everforest`.
 " Available values: 'hard', 'medium'(default), 'soft'
-let g:everforest_background = 'hard'
-colorscheme everforest
+" let g:everforest_background = 'hard'
+colorscheme gruvbox
 syntax on
 
 "hi User1 cterm=reverse ctermfg=12 ctermbg=0
-hi StatusLine term=bold,reverse cterm=reverse ctermfg=2 ctermbg=0 gui=reverse guifg=#a7c080 guibg=#2b3339
-hi StatusLineNC term=bold,reverse cterm=reverse ctermfg=7 ctermbg=0 gui=reverse guifg=#53605c guibg=#2b3339
+hi StatusLine term=bold,reverse cterm=reverse ctermfg=2 ctermbg=0 gui=reverse guifg=#fabc2e guibg=#2b3339
+hi StatusLineNC term=bold,reverse cterm=reverse ctermfg=7 ctermbg=0 gui=reverse guifg=#928373 guibg=#2b3339
 
 " netrw
+let g:netrw_keepdir = 0
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_alto = 1
 let g:netrw_winsize = 25
+hi! link netrwMarkFile Search
 
 
 " }}}

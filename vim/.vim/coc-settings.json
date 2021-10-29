@@ -1,17 +1,19 @@
 {
   "eslint.run": "onSave",
-  "eslint.autoFixOnSave": false,
+  "eslint.autoFixOnSave": true,
 
   "coc.preferences.formatOnSaveFiletypes": [
+    "tsx",
+    "ts"
   ],
   "suggest.noselect": false,
   "diagnostic.errorSign": "*",
   "diagnostic.warningSign": "*",
   "diagnostic.infoSign": "*",
   "diagnostic.hintSign": "*",
+  "diagnostic.enableMessage": "jump",
   "suggest.autoTrigger": "none",
   "suggest.maxCompleteItemCount": 10,
-  "diagnostic.messageTarget": "echo",
   "signature.enable": false,
   "signature.target": "echo"
 }
