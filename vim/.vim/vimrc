@@ -81,10 +81,10 @@ augroup END
 
 nnoremap - /
 
-nnoremap <silent> <leader>w :w<CR>
-nnoremap <silent> <leader>q :q<CR>
-nnoremap <silent> <leader>s :so ~/.vim/vimrc<CR>
-nnoremap <silent> <leader>v :tabedit ~/.vim/vimrc<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>s :so ~/.vim/vimrc<CR>
+nnoremap <leader>v :tabedit ~/.vim/vimrc<CR>
 nnoremap <leader>r :%s//gc<Left><Left><Left>
 nnoremap <leader>f :grep -riF 
 nnoremap <leader><cr> :noh<CR>
@@ -93,26 +93,26 @@ nnoremap <leader>h <C-w>h
 nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 nnoremap <leader>t <c-]>
-nnoremap <silent> <C-n> :Lexplore<CR>
-nnoremap <silent> <leader>+ :vert res +10<CR>
-nnoremap <silent> <leader>- :vert res -10<CR>
-nnoremap <silent> <leader>* :res +10<CR>
-nnoremap <silent> <leader>_ :res -10<CR>
-nnoremap <silent> <leader>n :cnext<CR>
-nnoremap <silent> <leader>p :cprev<CR>
+nnoremap <C-n> :Lexplore<CR>
+nnoremap <leader>+ :vert res +10<CR>
+nnoremap <leader>- :vert res -10<CR>
+nnoremap <leader>* :res +10<CR>
+nnoremap <leader>_ :res -10<CR>
+nnoremap <leader>n :cnext<CR>
+nnoremap <leader>p :cprev<CR>
 
 " FZF
 nnoremap <leader>b :Buffers<CR>
-nnoremap <silent> <C-p> :GFiles<CR>
-"nnoremap <silent> <C-S-p> :Files<CR>
+nnoremap <C-p> :GFiles<CR>
+"nnoremap <C-S-p> :Files<CR>
 
 " VIM-COC
 
 " GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap gd <Plug>(coc-definition)
+nmap gy <Plug>(coc-type-definition)
+nmap gi <Plug>(coc-implementation)
+nmap gr <Plug>(coc-references)
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -132,26 +132,26 @@ endfunction
 nmap <leader>cr <Plug>(coc-rename)
 
 " view all errors
-nnoremap <silent> <leader>cl  :<C-u>CocList locationlist<CR>
+nnoremap <leader>cl  :<C-u>CocList locationlist<CR>
 
 " restart when tsserver gets wonky
-nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
+nnoremap <leader>cR  :<C-u>CocRestart<CR>
 
 " manage extensions
-nnoremap <silent> <leader>cx  :<C-u>CocList extensions<cr>
+nnoremap <leader>cx  :<C-u>CocList extensions<cr>
 
 " list commands available in tsserver (and others)
-nnoremap <silent> <leader>cc  :<C-u>CocList commands<cr>
+nnoremap <leader>cc  :<C-u>CocList commands<cr>
 
 " Diagnostics
-nmap <silent> <leader>cp <Plug>(coc-diagnostic-prev)
-nmap <silent> <leader>cn <Plug>(coc-diagnostic-next)
-nmap <silent> <leader>ci <Plug>(coc-diagnostic-info)
-nnoremap <silent> <leader>cd  :<C-u>CocDiagnostic<cr>
+nmap <leader>cp <Plug>(coc-diagnostic-prev)
+nmap <leader>cn <Plug>(coc-diagnostic-next)
+nmap <leader>ci <Plug>(coc-diagnostic-info)
+nnoremap <leader>cd  :<C-u>CocDiagnostic<cr>
 
 " show quickaction
-nmap <silent> <leader>ca <Plug>(coc-codeaction-cursor)
-vmap <silent> <leader>ca <Plug>(coc-codeaction-selected)
+nmap <leader>ca <Plug>(coc-codeaction-cursor)
+vmap <leader>ca <Plug>(coc-codeaction-selected)
 
 " use <c-space>for trigger completion
 inoremap <silent><expr> <NUL> coc#refresh()
@@ -159,8 +159,8 @@ if has('gui_running')
   inoremap <silent><expr> <c-space> coc#refresh()
 endif
 
-nnoremap <silent> <leader>cf <Plug>(coc-format)
-vnoremap <silent> <leader>cf <Plug>(coc-format-selected)
+nnoremap <leader>cf <Plug>(coc-format)
+vnoremap <leader>f <Plug>(coc-format-selected)
 
 " }}}
 
