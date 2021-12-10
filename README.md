@@ -29,3 +29,4 @@ $ stow --target ~ --restow <package name>
 * vim
 * git
 * tmux
+* ideavim
