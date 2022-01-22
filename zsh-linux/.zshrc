@@ -87,6 +87,8 @@ alias glo="git log --pretty=oneline -n 20 --graph --abbrev-commit"
 alias docker_wipe_all="docker system prune --all --volumes"
 alias docker_wipe="docker system prune"
 
+alias npm_update_all="npm outdated --parseable | cut -f4 -d: | xargs npm i"
+
 #
 # Prompt
 #
