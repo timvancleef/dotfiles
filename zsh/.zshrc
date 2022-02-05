@@ -48,13 +48,16 @@ add-zsh-hook precmd vcs_info
 #
 # Load nvm and node
 #
-export NVM_DIR="$HOME/.nvm"
-[ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh" # This loads nvm
+# using Homebrew on Mac OSX
+if [[ -x "$(command -v brew)" && -s "$(brew --prefix)/opt/nvm/nvm.sh" ]]; then
+  export NVM_DIR="$HOME/.nvm"
+  source "$(brew --prefix)/opt/nvm/nvm.sh"
+fi
 
 #
 # Load npm completion
 #
-source ~/.zsh/npm-completion.sh
+[ -x "$(command -v npm)" ] && source <(npm completion)
 
 #
 # Exports
@@ -64,19 +67,15 @@ export LANG='en_US.UTF-8';
 export LC_ALL='en_US.UTF-8';
 export LC_MESSAGES=C
 export LSCOLORS="gxfxcxdxbxegedabagacad"
-export JAVA_HOME=$(/usr/libexec/java_home)
 export TERM=xterm-256color
 
 #
 # Aliases
 #
-DEV_BASE="~/Development"
+alias la="ls -lAh"
+alias l="ls -lh"
 
-alias la="ls -lA"
-alias l="ls -l"
-
-alias brew_update="brew update && brew upgrade && brew cleanup --prune all -s && brew doctor && brew missing"
-alias dv="cd ${DEV_BASE}"
+alias dv="cd ~/Development"
 
 alias ..="cd .."
 alias ...="cd ../.."
@@ -91,10 +90,12 @@ alias glo="git log --pretty=oneline -n 20 --graph --abbrev-commit"
 alias docker_wipe_all="docker system prune --all --volumes"
 alias docker_wipe="docker system prune"
 
+alias npm_update_all="npm outdated --parseable | cut -f4 -d: | xargs npm i"
+
 #
 # Prompt
 #
-PROMPT='❯ %F{010}%2~%f${vcs_info_msg_0_} '
+PROMPT='$ %F{010}%2~%f${vcs_info_msg_0_} '
 
 #
 # Frunctions
