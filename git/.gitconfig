@@ -9,10 +9,11 @@
 [push]
 	default = current
 [merge]
-	tool = kdiff3
+	tool = vimdiff
+  conflictstyle = diff3
 	ff = only
 [mergetool]
-	prompt = no
+	prompt = false
 [pager]
 	diff = diff-so-fancy | less --tabs=4 -RFX
 	show = diff-so-fancy | less --tabs=4 -RFX
