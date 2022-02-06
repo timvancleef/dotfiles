@@ -1,4 +1,4 @@
-# My dotfiles
+# Dotfiles
 
 Dotfiles are managed via [GNU stow](https://www.gnu.org/software/stow/).
 
@@ -24,7 +24,6 @@ $ stow --target ~ --restow <package name>
 
 ## Available packages
 
-* bash
 * zsh
 * vim
 * git
