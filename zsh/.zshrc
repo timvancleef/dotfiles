@@ -93,9 +93,13 @@ fi
 alias la="ls -lAh"
 alias l="ls -lh"
 
-alias dl="cd ~/Downloads"
-alias dt="cd ~/Desktop"
-alias dv="cd ~/Development"
+if [ -n "$DEV_BASE" ]; then
+  alias dv="cd $DEV_BASE"
+else
+  alias dv="cd $HOME/Development"
+fi
+alias dl="cd $HOME/Downloads"
+alias dt="cd $HOME/Desktop"
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
