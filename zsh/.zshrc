@@ -57,7 +57,12 @@ fi
 #
 # Load npm completion
 #
-[ -x "$(command -v npm)" ] && source <(npm completion)
+[ -r "$HOME/.zsh/npm-completion.sh" ] && source "$HOME/.zsh/npm-completion.sh"
+
+#
+# Load local exports
+#
+[ -r "$HOME/.zsh/zshrc.local" ] && source "$HOME/.zsh/zshrc.local"
 
 #
 # Exports
@@ -129,7 +134,7 @@ PROMPT='$ %F{010}%2~%f${vcs_info_msg_0_} '
 #
 # Frunctions
 #
-function color_palette {
+function color-palette {
 	for i in {0..255} ; do
 		printf "\x1b[48;5;%sm%3d\e[0m " "$i" "$i"
 		if (( i == 15 )) || (( i > 15 )) && (( (i-15) % 6 == 0 )); then
@@ -138,3 +143,6 @@ function color_palette {
 	done
 }
 
+function update-npm-completion {
+  [ -x "$(command -v npm)" ] && npm completion > "$HOME/.zsh/npm-completion.sh"
+}

@@ -2,3 +2,5 @@
 .netrwhist
 
 vim/.vim/plugged/
+
+zsh/.zsh/zshrc.local

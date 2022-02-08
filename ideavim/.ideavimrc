@@ -17,11 +17,8 @@ set relativenumber
 let mapleader=" "
 let g:mapleader=" "
 
-"nmap - :action Find<CR>
 nmap - /
 nmap _ :action FindInPath<CR>
-
-
 
 nnoremap <leader>w :write<CR>
 
@@ -30,16 +27,19 @@ nnoremap <leader>h <C-w>h
 nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 
-
 nnoremap <leader>ca :action Refactorings.QuickListPopupAction<CR>
 nnoremap <leader>cr :action RenameElement<CR>
 nnoremap <leader>ci :action ShowErrorDescription<CR>
 nnoremap <leader>cn :action GotoNextError<CR>
 nnoremap <leader>cp :action GotoPreviousError<CR>
+nnoremap <leader>cv :action IntroduceVariable<CR>
+nnoremap <leader>cm :action ExtractMethod<CR>
+
 nnoremap gd :action GotoDeclaration<CR>
 nnoremap gi :action GotoImplementation<CR>
 nnoremap gr :action FindUsages<CR>
 nnoremap gt :action GotoTest<CR>
+
 nnoremap <C-e> 2<C-e>
 nnoremap <C-y> 2<C-y>
 nnoremap <leader><CR> :noh<CR>
