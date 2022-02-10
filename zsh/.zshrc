@@ -83,7 +83,6 @@ export MANPAGER='less -X';
 #
 if [ $(uname -s) = "Darwin" ]; then
   alias ls="ls -G"
-  alias brew_update="brew update && brew upgrade && brew cleanup --prune all -s && brew doctor && brew missing"
   alias mute="osascript -e 'set volume output muted true'"
   alias unmute="osascript -e 'set volume output muted false'"
 else
@@ -149,4 +148,10 @@ function color-palette {
 
 function update-npm-completion {
   [ -x "$(command -v npm)" ] && npm completion > "$HOME/.zsh/npm-completion.sh"
+}
+
+
+function brew_update {
+  [ -n "$(command -v brew_update_preflight)" ] && brew_update_preflight
+  [ -x "$(command -v brew)" ] && brew update && brew upgrade && brew cleanup --prune all -s && brew doctor && brew missing;
 }
