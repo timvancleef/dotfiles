@@ -34,6 +34,9 @@ nnoremap <leader>cn :action GotoNextError<CR>
 nnoremap <leader>cp :action GotoPreviousError<CR>
 nnoremap <leader>cv :action IntroduceVariable<CR>
 nnoremap <leader>cm :action ExtractMethod<CR>
+nnoremap <leader>rr :action Rerun<CR>
+nnoremap <leader>rt :action RunClass<CR>
+nnoremap <leader>rg :action RunContextGroup<CR>
 
 nnoremap gd :action GotoDeclaration<CR>
 nnoremap gi :action GotoImplementation<CR>
