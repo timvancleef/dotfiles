@@ -48,10 +48,12 @@ add-zsh-hook precmd vcs_info
 #
 # Load nvm and node
 #
+export NVM_DIR="$HOME/.nvm"
 # using Homebrew on Mac OSX
 if [[ -x "$(command -v brew)" && -s "$(brew --prefix)/opt/nvm/nvm.sh" ]]; then
-  export NVM_DIR="$HOME/.nvm"
   source "$(brew --prefix)/opt/nvm/nvm.sh"
+else
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 fi
 
 #
