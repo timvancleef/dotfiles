@@ -273,3 +273,5 @@ hi StatusLine term=bold,reverse cterm=reverse ctermfg=2 ctermbg=0 gui=reverse gu
 hi StatusLineNC term=bold,reverse cterm=reverse ctermfg=7 ctermbg=0 gui=reverse guifg=#928373 guibg=#2b3339
 
 " }}}
+
+au BufRead,BufNewFile *.handlebars,*.hbs set ft=html syntax=handlebars
