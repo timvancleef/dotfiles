@@ -58,5 +58,6 @@
     ],
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
-    }
+    },
+    "editor.fontFamily": "Hack, 'Droid Sans Mono', 'monospace', monospace"
 }
