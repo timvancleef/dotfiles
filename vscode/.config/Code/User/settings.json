@@ -16,10 +16,34 @@
             "before": [":"],
             "commands": [
                 "workbench.action.showCommands"
-            ],
-            "silent": true
+            ]
+        },
+        {
+            "before": ["<leader>", "w"],
+            "commands": [
+                "workbench.action.files.save"
+            ]
+        },
+        {
+            "before": ["g", "d"],
+            "commands": [
+                "workbench.action.revealDefinition"
+            ]
+        },
+        {
+            "before": ["<C-o>"],
+            "commands": [
+                "workbench.action.navigateBack"
+            ]
+        },
+        {
+            "before": ["<C-i>"],
+            "commands": [
+                "workbench.action.navigateForward"
+            ]
         }
     ],
+    "vim.leader": " ",
     "vim.easymotion": true,
     "vim.incsearch": true,
     "vim.useSystemClipboard": true,
