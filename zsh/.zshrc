@@ -173,7 +173,7 @@ function update_kubectl_completion {
 
 function update_brew {
   [ -n "$(command -v update_brew_preflight)" ] && brew_update_preflight
-  [ -x "$(command -v brew)" ] && brew update && brew upgrade && brew cleanup --prune all -s && brew autoremove &&  brew doctor && brew missing;
+  [ -x "$(command -v brew)" ] && brew update && brew upgrade && brew cleanup --prune=30 && brew autoremove &&  brew doctor && brew missing;
 }
 
 function update_repos {
