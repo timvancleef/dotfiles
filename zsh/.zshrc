@@ -1,8 +1,8 @@
 #
 # Init ZSH plugins
 #
-fpath=(~/.zsh/functions $fpath)
-autoload -Uz compinit vcs_info add-zsh-hook
+fpath=(~/.zsh/functions ~/.zsh/completions $fpath)
+autoload -Uz compinit vcs_info add-zsh-hook color_palette
 
 #
 # Basic ZSH settings
@@ -32,7 +32,7 @@ zstyle ':completion:*' completer _complete _ignored
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
 zstyle :compinstall filename '/Users/tvancleef/.zshrc'
-compinit
+compinit -i
 
 #
 # GIT integration
@@ -60,16 +60,6 @@ fi
 # Load npm completion
 #
 [ -r "$HOME/.zsh/npm-completion.sh" ] && source "$HOME/.zsh/npm-completion.sh"
-
-#
-# Load kubectl completion
-#
-[ -r "$HOME/.zsh/kubectl-completion.sh" ] && source "$HOME/.zsh/kubectl-completion.sh"
-
-#
-# Load bw completion
-#
-[ -r "$HOME/.zsh/bw-completion.sh" ] && source "$HOME/.zsh/bw-completion.sh" && compdef _bw bw
 
 #
 # Load local exports
@@ -154,14 +144,6 @@ PROMPT='$ %F{010}%2~%f${vcs_info_msg_0_} '
 #
 # Frunctions
 #
-function color_palette {
-	for i in {0..255} ; do
-		printf "\x1b[48;5;%sm%3d\e[0m " "$i" "$i"
-		if (( i == 15 )) || (( i > 15 )) && (( (i-15) % 6 == 0 )); then
-			printf "\n";
-		fi
-	done
-}
 
 function update_npm_completion {
   [ -x "$(command -v npm)" ] && npm completion > "$HOME/.zsh/npm-completion.sh"
