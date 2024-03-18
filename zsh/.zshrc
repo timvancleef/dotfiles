@@ -1,7 +1,7 @@
 #
 # Init ZSH plugins
 #
-fpath=(~/.zsh/functions ~/.zsh/completions $fpath)
+fpath=(~/.zsh/functions ~/.zsh/completion $fpath)
 autoload -Uz compinit vcs_info add-zsh-hook color_palette
 
 #
