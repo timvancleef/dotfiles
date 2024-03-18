@@ -1,8 +1,8 @@
 #
 # Init ZSH plugins
 #
+fpath=(~/.zsh/functions $fpath)
 autoload -Uz compinit vcs_info add-zsh-hook
-fpath=(~/.zsh $fpath)
 
 #
 # Basic ZSH settings
