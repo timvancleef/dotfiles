@@ -1,0 +1,5 @@
+function update_npm_completion {
+  [ -x "$(command -v npm)" ] && npm completion > "$HOME/.zsh/npm-completion.sh"
+}
+
+update_npm_completion

@@ -1,24 +1,27 @@
 return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
+    version = "v0.9.2",
     config = function ()
         local configs = require("nvim-treesitter.configs")
 
         configs.setup({
             ensure_installed = {
+                "css",
+                "html",
                 "javascript",
                 "json",
                 "lua",
-                -- "terraform",
+                "markdown",
+                "python",
                 "typescript",
-                -- "vim",
-                "html",
-                "css",
+                "vue",
+                "dockerfile",
             },
             sync_install = true,
             highlight = { enable = true },
-            indent = { enable = true },  
-            auto_install = true,
+            indent = { enable = true },
+            auto_install = false,
         })
     end
 }

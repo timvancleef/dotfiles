@@ -156,24 +156,55 @@ require("lazy").setup("plugins")
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
+require('telescope').setup({
+	pickers = {
+		find_files = {
+			-- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+			find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+		},
+	},
+})
+
+function vim.getVisualSelection()
+	vim.cmd('noau normal! "vy"')
+	local text = vim.fn.getreg('v')
+	vim.fn.setreg('v', {})
+
+	text = string.gsub(text, "\n", "")
+	if #text > 0 then
+		return text
+	else
+		return ''
+	end
+end
+
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>fo', require('telescope.builtin').git_files, { desc = '[F]ile [O]pen' })
 vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]iles' })
+vim.keymap.set('n', '<leader>fc', function() require('telescope.builtin').find_files({ cwd = vim.fn.expand('%:p:h') }) end,
+        { desc = '[F]ind files in [C]urrent directory' })
 vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = '[F]ind by [G]rep' })
+vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = '[F]ind [W]ord under cursor' })
+vim.keymap.set('v', '<space>fw', function()
+	local text = vim.getVisualSelection()
+	require('telescope.builtin').live_grep({ default_text = text })
+end, opts)
+
 
 --
 -- LSP
 --
 require("mason").setup()
 require("mason-lspconfig").setup {
-    ensure_installed = { "lua_ls", "tsserver", "html", "cssls" },
+    ensure_installed = { "lua_ls", "tsserver", "html", "cssls", "volar" },
 }
 local lspconfig = require('lspconfig')
 lspconfig.tsserver.setup {}
 lspconfig.lua_ls.setup {}
 lspconfig.html.setup {}
 lspconfig.cssls.setup {}
+lspconfig.volar.setup {}
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer

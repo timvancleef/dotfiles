@@ -1,0 +1,5 @@
+function update_kubectl_completion {
+  [ -x "$(command -v kubectl)" ] && kubectl completion zsh > "$HOME/.zsh/completion/_kubectl"
+}
+
+update_kubectl_completion

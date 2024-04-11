@@ -1,14 +1,12 @@
 #
 # Init ZSH plugins
 #
-fpath=(~/.zsh/functions ~/.zsh/completion $fpath)
-autoload -Uz compinit vcs_info add-zsh-hook color_palette
+fpath=(~/.zsh/functions ~/.zsh/completion ~/.zsh/functions_local $fpath)
+autoload -Uz compinit vcs_info add-zsh-hook
 
 #
 # Basic ZSH settings
 #
-bindkey '^R' history-incremental-pattern-search-backward
-
 REPORTTIME=3
 HISTFILE=~/.zsh_history
 HISTSIZE=5000
@@ -28,9 +26,12 @@ setopt HIST_IGNORE_SPACE
 #
 # ZSH Completion
 #
-zstyle ':completion:*' completer _complete _ignored
+zstyle ':completion:*' completer _complete
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
+zstyle ':completion:*' menu select
+# zstyle ':completion:*:*:*:*:descriptions' format '%F{green}-- %d --%f'
+# zstyle ':completion:*' group-name ''
 zstyle :compinstall filename '/Users/tvancleef/.zshrc'
 compinit -i
 
@@ -41,30 +42,9 @@ zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*' unstagedstr '*'
 zstyle ':vcs_info:git:*' stagedstr '+'
-zstyle ':vcs_info:git:*' formats " (%F{003}%b%u%c%f)"
-zstyle ':vcs_info:git:*' actionformats "(%F{003}%b (%a)%u%c%f)"
+zstyle ':vcs_info:git:*' formats " (%F{142}%b%u%c%f)"
+zstyle ':vcs_info:git:*' actionformats "(%F{142}%b (%a)%u%c%f)"
 add-zsh-hook precmd vcs_info
-
-#
-# Load nvm and node
-#
-export NVM_DIR="$HOME/.nvm"
-# using Homebrew on Mac OSX
-if [[ -x "$(command -v brew)" && -s "$(brew --prefix)/opt/nvm/nvm.sh" ]]; then
-  source "$(brew --prefix)/opt/nvm/nvm.sh"
-else
-  [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
-fi
-
-#
-# Load npm completion
-#
-[ -r "$HOME/.zsh/npm-completion.sh" ] && source "$HOME/.zsh/npm-completion.sh"
-
-#
-# Load local exports
-#
-[ -r "$HOME/.zsh/zshrc.local" ] && source "$HOME/.zsh/zshrc.local"
 
 #
 # Exports
@@ -81,6 +61,25 @@ export EDITOR=nvim;
 export MANPAGER='less -X';
 
 #
+# Homebrew
+#
+if [ -d "/opt/homebrew" ]; then
+	export HOMEBREW_PREFIX="/opt/homebrew";
+	export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+	export HOMEBREW_REPOSITORY="/opt/homebrew";
+	export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
+	export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
+	export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
+fi
+
+export NVM_DIR="$HOME/.nvm"
+
+#
+# Load local exports
+#
+[ -r "$HOME/.zsh/zshrc.local" ] && source "$HOME/.zsh/zshrc.local"
+
+#
 # Aliases
 #
 if [ $(uname -s) = "Darwin" ]; then
@@ -94,11 +93,13 @@ fi
 alias la="ls -lAh"
 alias l="ls -lh"
 
-if [ -n "$DEV_BASE" ]; then
-  alias dv="cd $DEV_BASE"
-else
-  alias dv="cd $HOME/Development"
-fi
+function dv {
+    if [ -x "$(command -v fd)" ] && [ -x "$(command -v fzf)" ]; then
+        cd $(fd -d 3 -t d . $HOME/Development|fzf -e)
+    else
+        cd $HOME/Development
+    fi
+}
 alias dl="cd $HOME/Downloads"
 alias dt="cd $HOME/Desktop"
 alias grep="grep --color=auto"
@@ -139,53 +140,27 @@ fi
 #
 # Prompt
 #
-PROMPT='$ %F{010}%2~%f${vcs_info_msg_0_} '
+PROMPT='%F{109}%3~%f${vcs_info_msg_0_} '
 
 #
-# Frunctions
+# File manager
 #
+if type "nnn" > /dev/null; then
+    autoload fm_nnn
+    bindkey -s '^n' 'fm_nnn^M'
+fi
 
-function update_npm_completion {
-  [ -x "$(command -v npm)" ] && npm completion > "$HOME/.zsh/npm-completion.sh"
-}
+#
+# Custom functions
+#
+autoload -Uz $fpath[1]/*(.:t)
 
-function update_kubectl_completion {
-  [ -x "$(command -v kubectl)" ] && kubectl completion zsh > "$HOME/.zsh/kubectl-completion.sh"
-}
+#
+# Load npm completion
+#
+[ -r "$HOME/.zsh/npm-completion.sh" ] && source "$HOME/.zsh/npm-completion.sh"
 
-function update_brew {
-  [ -n "$(command -v update_brew_preflight)" ] && brew_update_preflight
-  [ -x "$(command -v brew)" ] && brew update && brew upgrade && brew cleanup --prune=30 && brew autoremove &&  brew doctor && brew missing;
-}
-
-function update_repos {
-    find . -maxdepth 1 -mindepth 1 -type d | while read dir; do
-        echo "--- Updating ${dir}"
-        cd "$dir"
-        git switch main && git fetch --prune && git pull && git branch --merged|grep -v '*'|xargs git branch -d
-        cd ..
-        echo "---"
-    done
-}
-
-function update_node {
-  if [[ -x "$(command -v brew)" && -s "$(brew --prefix)/opt/nvm/nvm.sh" ]]; then
-      nvm install --lts
-  else
-      [ -s "$NVM_DIR/nvm.sh" ] && nvm install --lts
-  fi
-  [ -x "$(command -v npm)" ] && npm outdated -g
-}
-
-function update_kubectl_krew {
-  [ -x "$(command -v kubectl)" ] && kubectl krew update && kubectl krew upgrade
-}
-
-function update_tfenv {
-  [ -x "$(command -v tfenv)" ] && tfenv version-name && echo "---" && tfenv list-remote | grep -v "-" | head -n 2
-}
-
-function update_bw_completion {
-  [ -x "$(command -v bw)" ] && bw completion --shell zsh > "$HOME/.zsh/bw-completion.sh"
-}
-
+#
+# Load fzf history search
+#
+[ -r "$HOME/.zsh/fzf-zsh-bindings.sh" ] && FZF_ALT_C_COMMAND= FZF_CTRL_T_COMMAND= source "$HOME/.zsh/fzf-zsh-bindings.sh"

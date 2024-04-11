@@ -1,8 +1,8 @@
 return {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
+    "morhetz/gruvbox",
     priority = 1000,
     config = function()
-        vim.cmd.colorscheme 'onedark'
+        vim.g.gruvbox_contrast_dark = "medium"
+        vim.cmd.colorscheme 'gruvbox'
     end,
 }

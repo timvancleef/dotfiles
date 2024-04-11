@@ -1,0 +1,5 @@
+function update_fzf_bindings {
+    fzf --zsh > ~/.zsh/fzf-zsh-bindings.sh
+}
+
+update_fzf_bindings
