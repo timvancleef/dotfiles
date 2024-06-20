@@ -117,7 +117,7 @@ vim.keymap.set("n", "<leader>Y", [["+Y]], opts)
 vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/cgI<Left><Left><Left><Left>]], opts)
 
 -- Open file explorer
-vim.keymap.set("n", "<C-n>", ":NnnPicker %:p:h<CR>", opts)
+vim.keymap.set("n", "<C-n>", ":NnnExplorer %:p:h<CR>", opts)
 --nnoremap <leader>dd :Lexplore %:p:h<CR>
 --nnoremap <Leader>da :Lexplore<CR>
 
@@ -157,54 +157,73 @@ require("lazy").setup("plugins")
 pcall(require('telescope').load_extension, 'fzf')
 
 require('telescope').setup({
-	pickers = {
-		find_files = {
-			-- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
-			find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
-		},
-	},
+    defaults = {
+        -- layout_strategy = 'vertical',
+    },
+    pickers = {
+        find_files = {
+            -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+            find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+        },
+    },
 })
 
 function vim.getVisualSelection()
-	vim.cmd('noau normal! "vy"')
-	local text = vim.fn.getreg('v')
-	vim.fn.setreg('v', {})
+    vim.cmd('noau normal! "vy"')
+    local text = vim.fn.getreg('v')
+    vim.fn.setreg('v', {})
 
-	text = string.gsub(text, "\n", "")
-	if #text > 0 then
-		return text
-	else
-		return ''
-	end
+    text = string.gsub(text, "\n", "")
+    if #text > 0 then
+        return text
+    else
+        return ''
+    end
 end
 
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>fo', require('telescope.builtin').git_files, { desc = '[F]ile [O]pen' })
-vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]iles' })
-vim.keymap.set('n', '<leader>fc', function() require('telescope.builtin').find_files({ cwd = vim.fn.expand('%:p:h') }) end,
-        { desc = '[F]ind files in [C]urrent directory' })
-vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = '[F]ind by [G]rep' })
-vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = '[F]ind [W]ord under cursor' })
+local telescope = require('telescope.builtin')
+
+vim.keymap.set('n', '<leader>?', telescope.oldfiles, { desc = '[?] Find recently opened files' })
+vim.keymap.set('n', '<leader><space>', telescope.buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader>fo', telescope.git_files, { desc = '[F]ile [O]pen' })
+vim.keymap.set('n', '<leader>ff',
+    function() telescope.find_files() end,
+    { desc = '[F]ind [F]iles' }
+)
+vim.keymap.set('n', '<leader>fc',
+    function() telescope.find_files({ cwd = vim.fn.expand('%:p:h') }) end,
+    { desc = '[F]ind files in [C]urrent directory' })
+vim.keymap.set('n', '<leader>fg', telescope.live_grep, { desc = '[F]ind by [G]rep' })
+vim.keymap.set('n', '<leader>fw', telescope.grep_string, { desc = '[F]ind [W]ord under cursor' })
 vim.keymap.set('v', '<space>fw', function()
-	local text = vim.getVisualSelection()
-	require('telescope.builtin').live_grep({ default_text = text })
-end, opts)
+    local text = vim.getVisualSelection()
+    telescope.live_grep({ default_text = text })
+end, { desc = '[F]ind visual [W]ord under cursor' })
+vim.keymap.set('n', 'gr', telescope.lsp_references, opts)
 
 
 --
 -- LSP
 --
+vim.diagnostic.config({
+    virtual_text = false,
+    underline = false
+})
+-- Add additional capabilities supported by nvim-cmp
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local servers = { "lua_ls", "tsserver", "html", "cssls", "volar" }
 require("mason").setup()
 require("mason-lspconfig").setup {
-    ensure_installed = { "lua_ls", "tsserver", "html", "cssls", "volar" },
+    ensure_installed = servers,
 }
 local lspconfig = require('lspconfig')
-lspconfig.tsserver.setup {}
-lspconfig.lua_ls.setup {}
-lspconfig.html.setup {}
-lspconfig.cssls.setup {}
-lspconfig.volar.setup {}
+
+for _, lsp in ipairs(servers) do
+    lspconfig[lsp].setup {
+        -- on_attach = my_custom_on_attach,
+        capabilities = capabilities,
+    }
+end
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -217,10 +236,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
         -- Buffer local mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
         local opts = { buffer = ev.buf }
-        vim.keymap.set('i', '<c-space>', vim.lsp.omnifunc, opts)
+        -- vim.keymap.set('i', '<c-space>', vim.lsp.omnifunc, opts)
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
         vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-        vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+        -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
         vim.keymap.set('n', 'gf', function()
             vim.lsp.buf.format { async = true }
         end, opts)
@@ -228,6 +247,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', '<leader>ci', vim.lsp.buf.hover, opts)
         vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename, opts)
         vim.keymap.set('n', '<leader>cn', vim.diagnostic.goto_next, opts)
+        vim.keymap.set('n', '<leader>cp', vim.diagnostic.goto_prev, opts)
         vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
 
         -- vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
@@ -238,3 +258,36 @@ vim.api.nvim_create_autocmd('LspAttach', {
         --  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
     end,
 })
+
+-- nvim-cmp setup
+local cmp = require('cmp')
+cmp.setup {
+    mapping = cmp.mapping.preset.insert({
+        -- ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
+        -- ['<C-d>'] = cmp.mapping.scroll_docs(4), -- Down
+        -- C-b (back) C-f (forward) for snippet placeholder navigation.
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<CR>'] = cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+        },
+        ['<Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            else
+                fallback()
+            end
+        end, { 'i', 's' }),
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                    cmp.select_prev_item()
+                else
+                    fallback()
+                end
+            end,
+            { 'i', 's' }),
+    }),
+    sources = {
+        { name = 'nvim_lsp', keyword_length = 3, max_item_count = 5 },
+    },
+}
