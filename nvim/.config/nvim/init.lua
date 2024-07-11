@@ -159,6 +159,11 @@ pcall(require('telescope').load_extension, 'fzf')
 require('telescope').setup({
     defaults = {
         layout_strategy = 'vertical',
+        layout_config = {
+            vertical = {
+                mirror = true
+            }
+        }
     },
     pickers = {
         find_files = {
