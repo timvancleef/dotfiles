@@ -4,7 +4,6 @@ function load_nvm {
     else
         [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
     fi
-    nvm install
 }
 
 load_nvm

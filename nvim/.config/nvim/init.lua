@@ -117,7 +117,7 @@ vim.keymap.set("n", "<leader>Y", [["+Y]], opts)
 vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/cgI<Left><Left><Left><Left>]], opts)
 
 -- Open file explorer
-vim.keymap.set("n", "<C-n>", ":NnnExplorer %:p:h<CR>", opts)
+vim.keymap.set("n", "<C-n>", ":NnnPicker %:p:h<CR>", opts)
 --nnoremap <leader>dd :Lexplore %:p:h<CR>
 --nnoremap <Leader>da :Lexplore<CR>
 
@@ -158,7 +158,7 @@ pcall(require('telescope').load_extension, 'fzf')
 
 require('telescope').setup({
     defaults = {
-        -- layout_strategy = 'vertical',
+        layout_strategy = 'vertical',
     },
     pickers = {
         find_files = {
@@ -211,7 +211,7 @@ vim.diagnostic.config({
 })
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local servers = { "lua_ls", "tsserver", "html", "cssls", "volar" }
+local servers = { "lua_ls", "tsserver", "html", "cssls", "volar", "pyright", "ruff" }
 require("mason").setup()
 require("mason-lspconfig").setup {
     ensure_installed = servers,
