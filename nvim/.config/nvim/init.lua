@@ -161,6 +161,7 @@ require('telescope').setup({
         layout_strategy = 'vertical',
         layout_config = {
             vertical = {
+                prompt_position = "top",
                 mirror = true
             }
         }
