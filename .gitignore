@@ -1,0 +1,8 @@
+.DS_Store
+.netrwhist
+.idea/
+
+vim/.vim/plugged/
+
+zsh/.zsh/zshrc.local
+zsh/.zsh/functions_local

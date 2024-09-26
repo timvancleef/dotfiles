@@ -1,0 +1,9 @@
+function load_nvm {
+    if [[ -x "$(command -v brew)" && -s "$(brew --prefix)/opt/nvm/nvm.sh" ]]; then
+        source "$(brew --prefix)/opt/nvm/nvm.sh"
+    else
+        [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+    fi
+}
+
+load_nvm

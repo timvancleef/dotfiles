@@ -1,0 +1,7 @@
+function venv_activate {
+    [ -d ".venv" ] && source .venv/bin/activate
+    [ -d "venv" ] && source venv/bin/activate
+}
+
+venv_activate
+

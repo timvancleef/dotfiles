@@ -1,0 +1,6 @@
+function update_brew {
+  [ -n "$(command -v update_brew_preflight)" ] && brew_update_preflight
+  [ -x "$(command -v brew)" ] && brew update && brew upgrade && brew cleanup --prune=30 && brew autoremove &&  brew doctor && brew missing;
+}
+
+update_brew
