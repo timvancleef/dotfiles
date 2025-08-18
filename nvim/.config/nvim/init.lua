@@ -121,11 +121,22 @@ vim.keymap.set("n", "<leader>Y", [["+Y]], opts)
 
 -- Replace word under cursor
 vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/cgI<Left><Left><Left><Left>]], opts)
+-- vim.keymap.set("n", "<leader>r", [[:let @/=expand('<cword>')<cr>cgn]], opts)
 
 -- Open file explorer
 vim.keymap.set("n", "<C-n>", ":NnnPicker %:p:h<CR>", opts)
+-- vim.keymap.set("n", "<C-n>", ":NnnExplorer %:p:h<CR>", opts)
 --nnoremap <leader>dd :Lexplore %:p:h<CR>
 --nnoremap <Leader>da :Lexplore<CR>
+
+-- Close quickfix menu after selecting choice
+vim.api.nvim_create_autocmd(
+  "FileType", {
+  pattern={"qf"},
+  command=[[nnoremap <buffer> <CR> <CR>:cclose<CR>]]})
+
+vim.keymap.set("n", "<leader>co", ":copen<CR>", opts)
+
 
 -- Highlight yanked text
 -- See `:help vim.highlight.on_yank()`
@@ -222,7 +233,7 @@ vim.diagnostic.config({
 })
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local servers = { "tailwindcss", "svelte", "lua_ls", "ts_ls", "html", "cssls", "volar", "pyright", "ruff" }
+local servers = { "tailwindcss", "svelte", "lua_ls", "ts_ls", "html", "cssls", "pyright", "ruff", "biome" }
 require("mason").setup()
 require("mason-lspconfig").setup {
     ensure_installed = servers,

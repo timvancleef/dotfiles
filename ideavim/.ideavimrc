@@ -12,9 +12,6 @@ set ideajoin " Join Lines intelligently
 set multiple-cursors " Enabled multi cursor support
 set ideamarks " Sync marks and idea bookmarks
 
-set number
-set relativenumber
-
 " keyboard remaps and shortcuts
 let mapleader=" "
 let g:mapleader=" "
@@ -42,6 +39,7 @@ nnoremap <leader>rg :action RunContextGroup<CR>
 nnoremap <leader>xa :action CloseAllEditors<CR>
 nnoremap <leader>xo :action CloseAllEditorsButActive<CR>
 nnoremap <leader>fo :action GotoFile<CR>
+nnoremap <c-k> :action QuickJavaDoc<CR>
 
 nnoremap gd :action GotoDeclaration<CR>
 nnoremap gi :action GotoImplementation<CR>
