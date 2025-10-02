@@ -18,7 +18,7 @@ vim.opt.smarttab = true
 -- UI config
 --
 vim.opt.number = true         -- show absolute number
-vim.opt.relativenumber = true -- add numbers to each line on the left side
+-- vim.opt.relativenumber = true -- add numbers to each line on the left side
 vim.opt.cursorline = true     -- highlight cursor line underneath the cursor horizontally
 vim.opt.splitbelow = true     -- open new vertical split bottom
 vim.opt.splitright = true     -- open new horizontal splits right
@@ -238,13 +238,12 @@ require("mason").setup()
 require("mason-lspconfig").setup {
     ensure_installed = servers,
 }
-local lspconfig = require('lspconfig')
 
 for _, lsp in ipairs(servers) do
-    lspconfig[lsp].setup {
+    vim.lsp.config(lsp, {
         -- on_attach = my_custom_on_attach,
         capabilities = capabilities,
-    }
+    })
 end
 
 -- Use LspAttach autocommand to only map the following keys
