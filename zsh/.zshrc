@@ -164,3 +164,5 @@ autoload -Uz $fpath[1]/*(.:t)
 # Load fzf history search
 #
 [ -r "$HOME/.zsh/fzf-zsh-bindings.sh" ] && FZF_ALT_C_COMMAND= FZF_CTRL_T_COMMAND= source "$HOME/.zsh/fzf-zsh-bindings.sh"
+
+export PATH="$HOME/.local/bin${PATH:+:${PATH}}"

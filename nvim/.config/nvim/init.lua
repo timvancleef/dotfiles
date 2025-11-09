@@ -233,7 +233,7 @@ vim.diagnostic.config({
 })
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local servers = { "tailwindcss", "svelte", "lua_ls", "ts_ls", "html", "cssls", "pyright", "ruff", "biome" }
+local servers = { "tailwindcss", "svelte", "lua_ls", "ts_ls", "html", "cssls", "pyright", "biome" }
 require("mason").setup()
 require("mason-lspconfig").setup {
     ensure_installed = servers,
