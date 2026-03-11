@@ -55,7 +55,7 @@ vim.opt.backup = false
 vim.opt.scrolloff = 6
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
-vim.opt.updatetime = 250
+-- vim.opt.updatetime = 250
 --vim.opt.timeoutlen = 300
 vim.opt.colorcolumn = "80"
 
@@ -234,7 +234,7 @@ vim.diagnostic.config({
 })
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local servers = { "tailwindcss", "svelte", "lua_ls", "ts_ls", "html", "cssls", "pyright", "biome" }
+local servers = { "tailwindcss", "svelte", "lua_ls", "ts_ls", "html", "cssls" }
 require("mason").setup()
 require("mason-lspconfig").setup {
     ensure_installed = servers,
