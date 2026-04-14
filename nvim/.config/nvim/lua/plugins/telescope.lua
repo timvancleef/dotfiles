@@ -1,7 +1,7 @@
 -- fuzzy finder
 return {
     'nvim-telescope/telescope.nvim',
-    tag = 'v0.2.0',
+    tag = 'v0.2.1',
     dependencies = {
       'nvim-lua/plenary.nvim',
       -- Fuzzy Finder Algorithm which requires local dependencies to be built.
