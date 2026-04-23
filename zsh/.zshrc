@@ -54,7 +54,6 @@ export LANG='en_US.UTF-8';
 export LC_ALL='en_US.UTF-8';
 export LC_MESSAGES=C
 export LSCOLORS="gxfxcxdxbxegedabagacad"
-#export TERM=xterm-256color
 export EDITOR=nvim;
 
 # Don’t clear the screen after quitting a manual page.

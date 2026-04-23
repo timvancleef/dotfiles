@@ -33,9 +33,6 @@ $ stow --target ~ --restow <package name>
 
 ## Available packages
 
-* zsh
-* vim
-* nvim
 * git
-* tmux
 * ideavim
+* zsh
